@@ -1,1 +1,1 @@
-This is a sample application using [springdoc-openapi](https://springdoc.github.io/springdoc-openapi-demos/) for generating OpenAPI v3 documentation.
+This is a sample application using [springdoc-openapi](https://springdoc.github.io/springdoc-openapi-demos/) to generate OpenAPI v3 compliant documentation.
