@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 public class EmployeeRepository {
@@ -21,6 +22,10 @@ public class EmployeeRepository {
 
     public List<Employee> list() {
         return new ArrayList<>(employees.values());
+    }
+
+    public Optional<Employee> get(long id) {
+        return Optional.ofNullable(employees.get(id));
     }
 
     private Long generateId() {

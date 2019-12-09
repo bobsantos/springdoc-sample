@@ -5,6 +5,9 @@ import com.bobsantosjr.openapiv3.springdocsample.core.employee.EmployeeRepositor
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 import static java.util.Objects.requireNonNull;
 
 @RestController
@@ -24,6 +27,18 @@ public class EmployeeController {
 
     @GetMapping
     public ResponseEntity<?> get() {
-        return ResponseEntity.ok(employeeRepository.list());
+        List<Employee> employees = employeeRepository.list();
+
+        return employees.size() > 0 ? ResponseEntity.ok(employeeRepository.list()) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> get(@PathVariable long id) {
+        Optional<Employee> employee = employeeRepository.get(id);
+        if(employee.isPresent()) {
+            return ResponseEntity.ok(employee.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
