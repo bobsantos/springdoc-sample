@@ -28,17 +28,17 @@ public class EmployeeController {
     @GetMapping
     public ResponseEntity<?> get() {
         List<Employee> employees = employeeRepository.list();
-
         return employees.size() > 0 ? ResponseEntity.ok(employeeRepository.list()) : ResponseEntity.notFound().build();
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> get(@PathVariable long id) {
         Optional<Employee> employee = employeeRepository.get(id);
-        if(employee.isPresent()) {
-            return ResponseEntity.ok(employee.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return employee.isPresent() ? ResponseEntity.ok(employee.get()) : ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable long id) {
+        return employeeRepository.delete(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 }
