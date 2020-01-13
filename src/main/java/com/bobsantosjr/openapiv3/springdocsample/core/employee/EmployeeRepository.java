@@ -28,6 +28,10 @@ public class EmployeeRepository {
         return Optional.ofNullable(employees.get(id));
     }
 
+    public boolean delete(long id) {
+        return employees.remove(id) != null;
+    }
+
     private Long generateId() {
         return (long) (employees.size() + 1);
     }
